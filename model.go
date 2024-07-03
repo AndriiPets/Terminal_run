@@ -21,7 +21,7 @@ func RunTUI(game GameInterface) {
 	app := &App{
 		Game: game,
 		Keys: KeyMap{
-			Up: key.NewBinding(key.WithKeys("k", "up", " ", "w"), key.WithHelp("↑/k/w/space", "jump")),
+			Up:   key.NewBinding(key.WithKeys("k", "up", " ", "w"), key.WithHelp("↑/k/w/space", "jump")),
 			Quit: key.NewBinding(key.WithKeys("q", "ctrl+c"), key.WithHelp("q/ctrl+c", "quit")),
 		},
 	}
@@ -29,12 +29,12 @@ func RunTUI(game GameInterface) {
 	p := tea.NewProgram(app)
 	if _, err := p.Run(); err != nil {
 		fmt.Printf("Alas, there's been an error: %v", err)
-        os.Exit(1)
+		os.Exit(1)
 	}
 }
 
 func (app *App) tick() tea.Cmd {
-	return tea.Tick(time.Second/5, func(t time.Time) tea.Msg {
+	return tea.Tick(time.Second/15, func(t time.Time) tea.Msg {
 		return TickMsg(t)
 	})
 }
@@ -61,10 +61,10 @@ func (app *App) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 			return app, tea.Quit
 
 		case key.Matches(msg, app.Keys.Up):
-			
+
 			app.Game.Move("up")
 		}
-	
+
 	case TickMsg:
 		return app.evolve()
 	}
@@ -77,6 +77,7 @@ func (app *App) View() string {
 	frame := app.Game.ScreenData()
 
 	sb.WriteString(strings.Join(frame, "\n"))
+	sb.WriteString(fmt.Sprintf("\n%d meter(s) ", app.Game.GetScore()))
 
 	return sb.String()
 }

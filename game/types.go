@@ -1,12 +1,12 @@
 package game
 
 type Vec2 struct {
-	X,Y int
+	X, Y int
 }
 
 type char struct {
-	X int
-	Y int
+	X  int
+	Y  int
 	VX int
 	VY int
 }

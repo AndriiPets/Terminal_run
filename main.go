@@ -5,7 +5,7 @@ import (
 )
 
 func main() {
-	g := game.NewGame(18, 12)
+	g := game.NewGame(50, 12)
 
 	RunTUI(g)
 }

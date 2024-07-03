@@ -8,13 +8,13 @@ type obstacle struct {
 func newObstacle(h int, pos *Vec2) *obstacle {
 	return &obstacle{
 		height: h,
-		Vec2: pos,
+		Vec2:   pos,
 	}
 }
 
 func (o *obstacle) overlaps(pos Vec2) bool {
 	colOverlap := o.X == pos.X
-	heightOverlap := pos.Y >= o.Y - o.height
+	heightOverlap := pos.Y > o.Y-o.height
 	return colOverlap && heightOverlap
 }
 

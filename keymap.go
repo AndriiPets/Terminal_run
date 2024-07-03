@@ -3,6 +3,6 @@ package main
 import "github.com/charmbracelet/bubbles/key"
 
 type KeyMap struct {
-	Up key.Binding
+	Up   key.Binding
 	Quit key.Binding
 }
